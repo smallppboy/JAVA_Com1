@@ -9,7 +9,7 @@ class Pwr{
     double val;
 
     Pwr(double base,int exp){
-        this.b=base;
+        this.b = base;//this
         this.e=exp;
 
         this.val=1;
