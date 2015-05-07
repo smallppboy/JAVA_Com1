@@ -18,7 +18,7 @@ class FDemo {
     }
 
     void generator(int i){
-        FDemo o=new FDemo(i);
+        FDemo o =new FDemo(i);
     }
 }
 public class Finalize {
