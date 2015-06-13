@@ -11,6 +11,24 @@ class Queue {
         q = new char[size];
         putloc = getloc = 0;
     }
+    Queue(Queue ob){
+        putloc = ob.putloc;
+        getloc = ob.getloc;
+        q = new char[ob.q.length];
+
+        // copy elements
+        for(int i=getloc; i<putloc; i++)
+            q[i] = ob.q[i];
+    }
+
+    // Construct a Queue with initial values.
+    Queue (char a[]) {
+        putloc = 0;
+        getloc = 0;
+        q = new char[a.length];
+
+        for(int i=0; i<a.length; i++) put(a[i]);
+    }
 
     // put a char into the queue
     void put(char ch) {
