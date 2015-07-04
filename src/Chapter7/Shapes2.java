@@ -8,21 +8,45 @@ class TwoDShape {
     private double width;
     private double height;
 
+    TwoDShape() {
+        width = height = 0.0;
+    }
+
+    TwoDShape(double w, double h) {
+        width = w;
+        height = h;
+    }
+
+    TwoDShape(TwoDShape ob) {
+        width = ob.width;
+        height = ob.height;
+    }
+
+    //Construct object with equal width and height.
+    TwoDShape(double x) {
+        width = height = x;
+    }
+
     void showDim(){
         System.out.println("Width and height are " +
                             width + " and " + height);
     }
 
     double getWidth (){return width;}
-    double getHeight (){return height;}
+
     void setWidth (double w){width = w;}
+
+    double getHeight() {
+        return height;
+    }
+
     void setHeight (double h){height = h;}
 }
 
 // a subclass of TwoDShape for triangles.
 
 class Triangle extends TwoDShape {
-     String style;
+    String style;
 
     double area() {
         return getWidth()*getHeight()/2;
@@ -45,7 +69,7 @@ public class Shapes2 {
         t2.setHeight(12.0);
         t2.style="outlined";
 
-        System.out.println("Info for t1: ");
+        System.out.println("Info for t1(shape2): ");
         t1.showStyle();
         t1.showDim();
         System.out.println("Area is "+t1.area());
