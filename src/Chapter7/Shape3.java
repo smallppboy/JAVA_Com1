@@ -17,14 +17,14 @@ class Triangles extends TwoDShape {
     Triangles(String s, double w, double h) {
         // setWidth(w);
         // setHeight(h);
-        super(w, h);
+        super(w, h,"triangle");
 
         style =s;
     }
 
     //A one argument constructor
     Triangles(double x) {
-        super(x);
+        super(x,"triangle");
         style = "filled";
     }
 

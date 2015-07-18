@@ -1,5 +1,7 @@
 package Chapter7;
 
+import org.w3c.dom.css.Rect;
+
 /**
  * Created by ZhuangFang on 2015/6/24.
  */
@@ -7,9 +9,11 @@ package Chapter7;
 class TwoDShape {
     private double width;
     private double height;
+    private String name;
 
     TwoDShape() {
         width = height = 0.0;
+        name ="none";
     }
 
     TwoDShape(double w, double h) {
@@ -17,9 +21,20 @@ class TwoDShape {
         height = h;
     }
 
+    TwoDShape(double x, String n) {
+        width = height = x;
+        name = n;
+    }
+    TwoDShape(double w, double h, String n) {
+        width = w;
+        height = h;
+        name = n;
+    }
+
     TwoDShape(TwoDShape ob) {
         width = ob.width;
         height = ob.height;
+        name = ob.name;
     }
 
     //Construct object with equal width and height.
@@ -33,14 +48,19 @@ class TwoDShape {
     }
 
     double getWidth (){return width;}
-
-    void setWidth (double w){width = w;}
-
     double getHeight() {
         return height;
     }
 
+    void setWidth (double w){width = w;}
     void setHeight (double h){height = h;}
+
+    String getName(){return name;};
+
+    double area() {
+        System.out.println("area() must be overridden");
+        return 0.0;
+    }
 }
 
 // a subclass of TwoDShape for triangles.
@@ -80,5 +100,54 @@ public class Shapes2 {
         t2.showStyle();
         t2.showDim();
         System.out.println("Area is "+t2.area());
+    }
+}
+
+class Rectangle extends TwoDShape {
+    Rectangle(){
+        super();
+    }
+
+    //Constructor for Rectangle.
+    Rectangle(double w,double h){
+        super(w,h,"rectangle");
+    }
+
+    //Construct a square
+    Rectangle(double x){
+        super(x,"rectangle"); // call superclass constructor
+    }
+
+    //Constructor an object from an object.
+    Rectangle(Rectangle ob){
+        super(ob);
+    }
+
+    boolean isSquare() {
+        if(getWidth() == getHeight()) return true;
+        return false;
+    }
+
+    // Override area() for Rectangle
+    double area(){
+        return getWidth()*getHeight();
+    }
+}
+
+class DynShapre {
+    public static void main(String[] args) {
+        TwoDShape shapes[] = new TwoDShape[5];
+
+        shapes[0] = new Triangles("outlined",8.0,12.0);
+        shapes[1] = new Rectangle(10);
+        shapes[2] = new Rectangle(10,4);
+        shapes[3] = new Triangles(7.0);
+        shapes[4] = new TwoDShape(10,20,"generic");
+
+        for (int i=0; i<shapes.length; i++){
+            System.out.println("object is " + shapes[i].getName());
+            System.out.println("Area is " + shapes[i].area());
+            System.out.println();
+        }
     }
 }
