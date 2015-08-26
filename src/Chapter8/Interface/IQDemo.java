@@ -4,6 +4,48 @@ package Chapter8.Interface;
  * Created by ZhuangFang on 2015/8/16.
  */
 public class IQDemo {
+    public static void main(String[] args) {
+        FixedQueue q1 = new FixedQueue(10);
+        DynQueue q2 = new DynQueue(5);
+        CircularQueue q3 = new CircularQueue(10);
+
+        IcharQ iQ;
+
+        char ch;
+        int i;
+
+        iQ = q1;
+        //Put some chars into fixed queue.
+
+        for(i=0; i<10; i++)
+            iQ.put((char) ('A'+i));
+
+        //Show the queue.
+        System.out.println("Contents of fixed queue: ");
+        for(i=0; i<10; i++) {
+            ch=iQ.get();
+            System.out.print(ch);
+        }
+        System.out.println();
+
+        iQ=q2;
+
+        //Put some chars into dynamic queue.
+        for(i=0;i<10;i++)
+            iQ.put((char)('Z'-i));
+
+        // Show the queue.
+        System.out.println("Contents of dynamic queue: ");
+        for (i=0; i<10;i++){
+            ch=iQ.get();
+            System.out.print(ch);
+        }
+
+        System.out.println();
+
+        iQ =q3;
+        //Put some char
+    }
 }
 
 class FixedQueue implements IcharQ {
@@ -70,4 +112,35 @@ class CircularQueue implements IcharQ {
         return ch;
     }
 
+}
+
+class DynQueue implements IcharQ {
+    private char q[];
+    private int putloc,getloc;
+
+    public DynQueue(int size){
+        q=new char[size];
+        putloc=getloc=0;
+    }
+
+    //put a character into the queue.
+
+    public void put(char ch){
+        if(putloc == q.length) {
+            char t[]=new char [q.length*2];
+
+            for (int i=0;i<q.length;i++)
+                t[i] = q[i];
+            q=t;
+        }
+        q[putloc++]=ch;
+    }
+
+    public char get(){
+        if (getloc==putloc){
+            System.out.println(" - Queue is empty.");
+            return (char) 0;
+        }
+       return q[getloc++];
+    }
 }
